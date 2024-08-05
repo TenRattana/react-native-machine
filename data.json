@@ -1,0 +1,37 @@
+[
+    {
+      "Field": "TEXT_INPUT",
+      "Machinery_Name": { "title": "SEPARATOR S.7" },
+      "Checking_Process_Name": "เวลา",
+      "data": {
+        "placeholder": "ใส่เวลา",
+        "value": "18"
+      }
+    },
+    {
+      "Field": "TEXT_INPUT",
+      "Machinery_Name": { "title": "SEPARATOR S.7" },
+      "Checking_Process_Name": "ชนิดข้าว",
+      "data": {
+        "placeholder": "ใส่ชนิดข้าว",
+        "value": "E2"
+      }
+    },
+    {
+      "Field": "CHECK_BOX",
+      "Machinery_Name": { "title": "SEPARATOR S.7" },
+      "Checking_Process_Name": "รายการตรวจเช็ค",
+      "data": {
+        "list": {
+          "select": [
+            { "id": 0, "title": "ช่องระบาย A ข้าวดีปนหรือไม่", "value": false },
+            { "id": 1, "title": "ช่องระบาย B ข้าวดีปนหรือไม่", "value": false },
+            { "id": 2, "title": "ระบบลมดูด", "value": false },
+            { "id": 3, "title": "การทำงานของเครื่องจักร", "value": false },
+            { "id": 4, "title": "สภาพตะแกนงก่อน START เครื่อง", "value": false }
+          ]
+        }
+      }
+    }
+]
+  
