@@ -3,17 +3,13 @@ import { View, StyleSheet, TextInput, Text } from "react-native";
 
 const TextInputComponent = (props) => {
 
-  const contentText = props.title;
-  const contentPlaceholder = props.content.placeholder;
-  const contentValue = props.content.value;
+  const contentText = props.title ? props.title : null;
 
   return (
     <View>
       <Text style={styles.textContent}>{contentText}</Text>
 
       <TextInput
-        placeholder={contentPlaceholder ? contentPlaceholder : null}
-        value={contentValue ? contentValue : null}
         style={styles.inputText}
       />
     </View>

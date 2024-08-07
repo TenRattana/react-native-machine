@@ -3,25 +3,19 @@
       "Field": "TEXT_INPUT",
       "Machinery_Name": { "title": "SEPARATOR S.7" },
       "Checking_Process_Name": "เวลา",
-      "data": {
-        "placeholder": "ใส่เวลา",
-        "value": "18"
-      }
+      "Subdetail": null
     },
     {
       "Field": "TEXT_INPUT",
       "Machinery_Name": { "title": "SEPARATOR S.7" },
       "Checking_Process_Name": "ชนิดข้าว",
-      "data": {
-        "placeholder": "ใส่ชนิดข้าว",
-        "value": "E2"
-      }
+      "Subdetail": null
     },
     {
       "Field": "CHECK_BOX",
       "Machinery_Name": { "title": "SEPARATOR S.7" },
       "Checking_Process_Name": "รายการตรวจเช็ค",
-      "data": {
+      "Subdetail": {
         "list": {
           "select": [
             { "id": 0, "title": "ช่องระบาย A ข้าวดีปนหรือไม่", "value": false },

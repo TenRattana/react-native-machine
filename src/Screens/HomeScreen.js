@@ -6,6 +6,7 @@ const HomeScreen = ({navigation}) => {
     <View>
       <Text>Index Screen</Text>
       <Button title="Form Check" onPress={()=>navigation.navigate('Form')}/>
+      <Button title="Test Api Check" onPress={()=>navigation.navigate('Test')}/>
     </View>
   );
 };

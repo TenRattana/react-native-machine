@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,47 +8,80 @@ import {
 } from "react-native";
 import TextInputComponent from "../Components/TextInputComponent";
 import CheckBotComponent from "../Components/CheckBotComponent";
-
-const dynamic = require('../../data.json')
+import axios from "axios";
+import qs from "qs";
 
 const FormScreen = () => {
-  const [listcheck, setListcheck] = useState(dynamic);
-  const nameMachine = listcheck[0].Machinery_Name ? listcheck[0].Machinery_Name.title : null;
+  const [listcheck, setListcheck] = useState([]);
 
-  return listcheck.length > 0 ? (
-    <View>
+  useEffect(() => {
+    let data = qs.stringify({
+      machineQR: "SEPARATOR S.7",
+    });
+
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "http://10.99.100.105/demo/ServiceDemo.asmx/GetFormMachine",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      data: data,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        setListcheck(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const nameMachine =
+    listcheck.length > 0 && listcheck[0].Id_Machine_Group
+      ? listcheck[0].Id_Machine_Group
+      : "Unknown";
+
+  return (
+    <View style={styles.container}>
       <Text style={styles.textHead}>KFM ตารางตรวจเช็คเครื่องจักร</Text>
       <Text style={styles.textHead}>รุ่น {nameMachine}</Text>
       <FlatList
         data={listcheck}
-        renderItem={({ item, index }) => {
-          return (
-            <View>
-              {item.Field == "TEXT_INPUT" ? (
-                <TextInputComponent
-                  content={item.data}
-                  title={item.Checking_Process_Name}
-                />
-              ) : item.Field == "CHECK_BOX" ? (
-                <CheckBotComponent
-                  content={item.data}
-                  title={item.Checking_Process_Name}
-                  keyCheck={index}
-                  updateList={(newList) => setListcheck(newList)}
-                />
-              ) : null}
-            </View>
-          );
-        }}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item, index }) => (
+          <View>
+            {item.Name_Field_Group === "TEXT_INPUT" ? (
+              <TextInputComponent
+                content={item.Subdetail}
+                title={item.Name_Checking_Process}
+              />
+            ) : item.Name_Field_Group === "CHECK_BOX" ? (
+              <CheckBotComponent
+                content={item.Subdetail}
+                title={item.Checking_Process_Name}
+                keyCheck={index}
+                data={listcheck}
+                updateList={(newList) => setListcheck(newList)}
+              />
+            ) : null}
+          </View>
+        )}
       />
       <TouchableOpacity style={styles.buttonSubmit}>
         <Text style={styles.fixToText}>SUBMIT</Text>
       </TouchableOpacity>
     </View>
-  ) : null;
+  );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+  },
   textHead: {
     fontSize: 25,
     alignSelf: "center",

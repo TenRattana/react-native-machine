@@ -8,16 +8,14 @@ import {
 } from "react-native";
 import Checkbox from "expo-checkbox";
 
-const CheckBotComponent = (props, { updateList }) => {
-  const contentText = props.title;
-  const contentList = props.content.list.select;
-  const contentIndex = props.keyCheck;
+const CheckBotComponent = (props) => {
+  const {title , content , keyCheck , data , updateList} = props
 
   const updateCheckbox = (newValue, id, index) => {
-    const updatedListCheck = [...listcheck];
-    updatedListCheck[index].data.list.select = updatedListCheck[
+    const updatedListCheck = [...data];
+    updatedListCheck[index].Subdetail.list.select = updatedListCheck[
       index
-    ].data.list.select = updatedListCheck[index].data.list.select.map(
+    ].Subdetail.list.select = updatedListCheck[index].Subdetail.list.select.map(
       (item, i) => ({
         ...item,
         value: i === id ? newValue : item.value,
@@ -29,9 +27,9 @@ const CheckBotComponent = (props, { updateList }) => {
 
   return (
     <View>
-      <Text style={styles.textContent}>{contentText}</Text>
+      <Text style={styles.textContent}>{title}</Text>
       <FlatList
-        data={contentList}
+        data={content.list.select}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity style={styles.contarinerList}>
@@ -39,7 +37,7 @@ const CheckBotComponent = (props, { updateList }) => {
                 style={styles.checkbox}
                 value={item.value}
                 onValueChange={(newValue) =>
-                  updateCheckbox(newValue, item.id, contentIndex)
+                  updateCheckbox(newValue, item.id, keyCheck)
                 }
                 color={item.value ? "#4630EB" : undefined}
               />
