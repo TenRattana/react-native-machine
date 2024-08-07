@@ -26,11 +26,8 @@ const TestApi = () => {
         };
 
         const response = await axios.post(config);
-
-        // จัดการกับข้อมูลที่ได้รับ
         setData(response.data);
       } catch (err) {
-        // จัดการกับข้อผิดพลาด
         setError(err.message);
       } finally {
         setLoading(false);
